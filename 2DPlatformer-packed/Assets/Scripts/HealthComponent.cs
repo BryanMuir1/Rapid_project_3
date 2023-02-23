@@ -7,11 +7,16 @@ public class HealthComponent : MonoBehaviour
 {
 
     public float health;
-        public Image healthBar;
+    public Image healthBar;
     public bool hasHealthBar;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
 
-    public void update()
+
+    void Update()
     {
         if (hasHealthBar)
         {
