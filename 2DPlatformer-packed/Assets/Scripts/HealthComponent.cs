@@ -32,4 +32,12 @@ public class HealthComponent : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 10)
+        {
+            TakeDamage(20);
+        }
+    }
 }

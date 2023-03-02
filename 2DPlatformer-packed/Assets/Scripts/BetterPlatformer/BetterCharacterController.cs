@@ -16,6 +16,11 @@ public class BetterCharacterController : MonoBehaviour
     public int maxJumps;
     protected int currentjumpCount;
 
+    public float sprintSpeed;
+    public float sprintDuration;
+    public bool isSprinting;
+    public bool canSprint = true;
+
     public float speed = 5.0f;
     public float jumpForce = 1000;
 
@@ -53,7 +58,7 @@ public class BetterCharacterController : MonoBehaviour
         rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
 
         //Jump
-        if (jumped == true)
+        if (jumped == true && !isSprinting)
         {
             
 
@@ -77,7 +82,7 @@ public class BetterCharacterController : MonoBehaviour
     void Update()
     {
         animator.SetFloat("speed", Mathf.Abs(horizInput));
-
+       
 
         if (grounded)
         {
@@ -95,7 +100,18 @@ public class BetterCharacterController : MonoBehaviour
 
             animator.SetBool("isJumping", true);
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && isSprinting)
+        {
+            PlayerSprint();
+            //StartCoroutine("Dash");
+        }
 
+        if (!isSprinting)
+        {
+            //move character
+            rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+
+        }
         //Get Player input 
         horizInput = Input.GetAxis("Horizontal");     
     }
@@ -110,4 +126,50 @@ public class BetterCharacterController : MonoBehaviour
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
     }
+    public void PlayerSprint()
+    {
+        isSprinting = true;
+        if (facingRight)
+        {
+            rb.AddForce(Vector2.right * sprintSpeed, 0f);
+        }
+        else if (!facingRight)
+        {
+            rb.AddForce(Vector2.left * sprintSpeed, 0f);
+        }
+
+        StartCoroutine("dash");
+
+    }
+    IEnumerator dash()
+    {
+
+        yield return new WaitForSeconds(sprintDuration);
+        animator.SetBool("isSprinting", false);
+        isSprinting = false;
+    }
+
+    //private IEnumerator Dash()
+    //{
+    //    Debug.Log("Uhoh");
+    //    canSprint = false;
+    //    isSprinting = true;
+    //    float originalGravity = rb.gravityScale;
+    //    rb.gravityScale = 0;
+
+    //    if (facingRight)
+    //    {
+    //        rb.velocity = new Vector2(6, 0f);
+    //    }
+    //    else
+    //    {
+    //        rb.velocity = new Vector2(-6, 0f);
+    //    }
+
+    //    yield return new WaitForSeconds(sprintDuration);
+    //    rb.gravityScale = originalGravity;
+    //    rb.velocity = Vector3.zero;
+    //    isSprinting = false; 
+    //    canSprint = true;
+    //}
 }
