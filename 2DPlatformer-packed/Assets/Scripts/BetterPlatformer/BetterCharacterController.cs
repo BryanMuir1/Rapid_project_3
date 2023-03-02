@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.Events;
 
 //--------------------------------------------
 /*Better Character Controller Includes:
@@ -30,6 +30,10 @@ public class BetterCharacterController : MonoBehaviour
     protected Collider2D charCollision;
     protected Vector2 playerSize, boxSize;
 
+    public Animator animator;
+
+    public UnityEvent OnLandEvent;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +44,7 @@ public class BetterCharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         //Box Overlap Ground Check
         Vector2 boxCenter = new Vector2(transform.position.x + charCollision.offset.x, transform.position.y + -(playerSize.y + boxSize.y - 0.01f) + charCollision.offset.y);
         grounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundedLayers) != null;
@@ -50,6 +55,8 @@ public class BetterCharacterController : MonoBehaviour
         //Jump
         if (jumped == true)
         {
+            
+
             rb.AddForce(new Vector2(0f, jumpForce));
             Debug.Log("Jumping!");
 
@@ -69,23 +76,34 @@ public class BetterCharacterController : MonoBehaviour
 
     void Update()
     {
+        animator.SetFloat("speed", Mathf.Abs(horizInput));
+
+
         if (grounded)
         {
             currentjumpCount = maxJumps;
+            Onlanding();
         }
 
         //Input for jumping ***Multi Jumping***
         if (Input.GetButtonDown("Jump") && currentjumpCount > 1)
         {
             jumped = true;
+
             currentjumpCount--;
             Debug.Log("Should jump");
+
+            animator.SetBool("isJumping", true);
         }
 
         //Get Player input 
         horizInput = Input.GetAxis("Horizontal");     
     }
 
+    public void Onlanding()
+    {
+        animator.SetBool("isJumping", false);
+    }
     // Flip Character Sprite
     void FlipSprite()
     {
