@@ -49,6 +49,7 @@ public class BetterCharacterController : MonoBehaviour
     public Animator animator;
 
     public UnityEvent OnLandEvent;
+    public ParticleSystem dust;
 
     void Awake()
     {
@@ -78,7 +79,7 @@ public class BetterCharacterController : MonoBehaviour
             
 
             rb.AddForce(new Vector2(0f, jumpForce));
-            Debug.Log("Jumping!");
+            //Debug.Log("Jumping!");
 
             jumped = false;
         }
@@ -114,7 +115,7 @@ public class BetterCharacterController : MonoBehaviour
             jumped = true;
 
             currentjumpCount--;
-            Debug.Log("Should jump");
+           // Debug.Log("Should jump");
 
             animator.SetBool("isJumping", true);
         }
@@ -126,7 +127,8 @@ public class BetterCharacterController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speed = shiftSpeed;
-            Debug.Log("Should run");
+            createdust();
+           // Debug.Log("Should run");
 
             StartCoroutine (ResetSpeed());
         }
@@ -197,11 +199,15 @@ public class BetterCharacterController : MonoBehaviour
     {
         isWallJumping = false;
     }
-    
+    void createdust()
+    {
+        dust.Play();
+    }
+
     IEnumerator ResetSpeed()
     {
         yield return new WaitForSeconds(2.0f);
         speed = resetSpeed;
-        Debug.Log("reset");
+        //Debug.Log("reset");
     }
 }
