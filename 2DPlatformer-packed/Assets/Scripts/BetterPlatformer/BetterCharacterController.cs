@@ -61,7 +61,6 @@ public class BetterCharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
         //Box Overlap Ground Check
         Vector2 boxCenter = new Vector2(transform.position.x + charCollision.offset.x, transform.position.y + -(playerSize.y + boxSize.y - 0.01f) + charCollision.offset.y);
         grounded = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundedLayers) != null;
@@ -71,13 +70,9 @@ public class BetterCharacterController : MonoBehaviour
             //Move Character
             rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
         }
-
-
         //Jump
         if (jumped == true)
         {
-            
-
             rb.AddForce(new Vector2(0f, jumpForce));
             //Debug.Log("Jumping!");
 
@@ -101,7 +96,6 @@ public class BetterCharacterController : MonoBehaviour
     void Update()
     {
         animator.SetFloat("speed", Mathf.Abs(horizInput));
-
 
         if (grounded)
         {

@@ -32,6 +32,14 @@ public class HealthComponent : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void Heal(float damage)
+    {
+        health += damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 10)
@@ -41,10 +49,12 @@ public class HealthComponent : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        /*if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Health_Item")
         {
-            TakeDamage(20);
-        }*/
+
+            Heal(20);
+            Destroy(other.gameObject);
+        }
     }
    
 
