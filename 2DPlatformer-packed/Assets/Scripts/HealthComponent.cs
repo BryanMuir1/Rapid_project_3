@@ -9,7 +9,9 @@ public class HealthComponent : MonoBehaviour
     public float health;
     public Image healthBar;
     public bool hasHealthBar;
+    public Transform respawnPoint;
 
+  
     private void Start()
     {
         DontDestroyOnLoad(this);
