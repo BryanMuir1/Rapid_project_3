@@ -46,14 +46,23 @@ public class HealthComponent : MonoBehaviour
         {
             TakeDamage(20);
         }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            TakeDamage(20);
+
+        }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Health_Item")
         {
-
             Heal(20);
             Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "En_frog")
+        {
+            TakeDamage(20);
+
         }
     }
    

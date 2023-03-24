@@ -27,18 +27,18 @@ public class EN_Frog : MonoBehaviour
 
         floorTrigger = GetComponent<BoxCollider2D>();
 
-        characterCollider = GetComponent<CapsuleCollider2D>() ;
+        characterCollider = GetComponent<CapsuleCollider2D>();
 
     }
     private void Update()
     {
         rb.velocity = new Vector2(maxSpeed, rb.velocity.y);
-  
+
         if (mustTurn == true)
         {
-            Flip(); 
+            Flip();
         }
-       
+
     }
     void FixedUpdate()
     {
@@ -47,7 +47,7 @@ public class EN_Frog : MonoBehaviour
     void Flip()
     {
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
-        maxSpeed *= -1;  
+        maxSpeed *= -1;
 
     }
 
@@ -61,23 +61,24 @@ public class EN_Frog : MonoBehaviour
                 //characterCollider.enabled = false;
                 Destroy(gameObject, 0.5f);
             }
-            else
-            {
-                other.gameObject.GetComponent<HealthComponent>().TakeDamage(20);
-                //Vector2 difference = (transform.position - other.transform.position).normalized;
-                //Vector2 force = difference * knockbackForce;
-                //rb.AddForce(force, ForceMode2D.Impulse); //if you don't want to take into consideration enemy's mass then use ForceMode.VelocityChange
-               
-                //characterCollider.enabled = false;
-                //StartCoroutine(EnableCollider());
-                //Destroy(other.gameObject);
-            }
-        }
-    }
+            //            else
+            //            {
+            //                other.gameObject.GetComponent<HealthComponent>().TakeDamage(20);
+            //                Vector2 difference = (transform.position - other.transform.position).normalized;
+            //                Vector2 force = difference * knockbackForce;
+            //                rb.AddForce(force, ForceMode2D.Impulse); //if you don't want to take into consideration enemy's mass then use ForceMode.VelocityChange
 
-    IEnumerator EnableCollider()
-    {
-        yield return new WaitForSeconds(2);
-        characterCollider.enabled = true;
+            //                characterCollider.enabled = false;
+            //                StartCoroutine(EnableCollider());
+            //                Destroy(other.gameObject);
+            //            }
+            //        }
+            //    }
+
+            //    IEnumerator EnableCollider()
+            //    {
+            //        yield return new WaitForSeconds(2);
+            //        characterCollider.enabled = true;
+        }
     }
 }

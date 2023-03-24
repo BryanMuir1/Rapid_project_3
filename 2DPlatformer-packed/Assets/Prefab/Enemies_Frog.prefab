@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 7863251287495590993}
   m_Layer: 0
   m_Name: Enemies_Frog
-  m_TagString: Enemy
+  m_TagString: En_frog
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ Transform:
   m_Children:
   - {fileID: 7863251286947144226}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7863251287495590986
 SpriteRenderer:
@@ -139,6 +139,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  knockbackForce: 100
 --- !u!95 &7863251287495590998
 Animator:
   serializedVersion: 4
@@ -179,7 +180,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!70 &7863251287495590992
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
