@@ -14,7 +14,7 @@ public class HealthComponent : MonoBehaviour
   
     private void Start()
     {
-        DontDestroyOnLoad(this);
+        
     }
 
 
@@ -58,7 +58,7 @@ public class HealthComponent : MonoBehaviour
     {
         if (other.gameObject.tag == "Health_Item")
         {
-            Heal(20);
+            Heal(50);
             Destroy(other.gameObject);
         }
         if (other.gameObject.tag == "En_frog")
